@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sort Without Articles</title>
+  <title>Bands List</title>
 </head>
 <body>
 
@@ -10,7 +10,7 @@
     body {
       margin: 0;
       font-family: sans-serif;
-      background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+      background: url("https://source.unsplash.com/LwBdmG4qGsQ/2000x2000");
       background-size: cover;
       display: flex;
       align-items: center;
@@ -20,18 +20,19 @@
     #bands {
       list-style: inside square;
       font-size: 20px;
-      background: white;
       width: 500px;
-      margin: auto;
+      margin: 60px auto 60px auto;
       padding: 0;
-      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 0 0 20px #efefef;
+      text-align: center
     }
-    
+
     #bands li {
       border-bottom: 1px solid #efefef;
       padding: 20px;
+      list-style-type: none
     }
-    
+
     #bands li:last-child {
       border-bottom: 0;
     }
@@ -43,11 +44,36 @@
 
   </style>
 
-  <ul id="bands"></ul>
+  <ul id="bands" class="allBands">CLICK HERE TO SEE ALL BANDS</ul>
+  <ul id="bands" class="oneBand">CLICK HERE TO ADD BAND</ul>
 
 <script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+  const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+  // see all bands
+  const bandList = document.querySelector(".allBands");
+  function addingBands(e) {
+    bandList.innerText = "LIST OF ALL BANDS";
+    bands.forEach((band)=>{
+      bandList.insertAdjacentHTML("beforeend", `<li>${band}</li>`);
+    });
+  }
+  const addBands = bandList.addEventListener('click',addingBands);
+
+  // Adding one band at a time
+  const addingOneband = document.querySelector(".oneBand");
+  let count = -1;
+  function addingBand(e) {
+      count += 1 ;
+      if (count < bands.length){
+        addingOneband.insertAdjacentHTML("beforeend", `<li>${bands[count]}</li>`);
+      }
+      else {
+        alert("THERE ARE NO BANDS LEFT");
+        addingOneband.addEventListener('click', window.location.reload());
+      }
+}
+  const addBand = addingOneband.addEventListener('click',addingBand);
 
 </script>
 
